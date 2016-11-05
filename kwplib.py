@@ -85,7 +85,7 @@ class KwApiCon:
         values['user'] = self.user
         values['ltoken'] = self.ltoken
         result = self._query(values)
-        print result.response
+        return result
 
     def _query(self, values):
         QueryResponse = collections.namedtuple('QueryResponse', ['response', 'error_msg'])
