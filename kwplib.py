@@ -19,9 +19,6 @@ class KwApiCon:
         self.user = None
         self.ltoken = None
 
-        self.set_url(url)
-        self.set_user(user)
-
         logLevel = logging.INFO
         if verbose:
             logLevel = logging.DEBUG
@@ -29,6 +26,9 @@ class KwApiCon:
             format='%(levelname)s:%(asctime)s %(name)s %(message)s',
             datefmt='%Y/%m/%d %H:%M:%S')
         self.logger = logging.getLogger('kwplib')
+
+        self.set_url(url)
+        self.set_user(user)
 
 
     def set_url(self, url):
