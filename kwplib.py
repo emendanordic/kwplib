@@ -83,14 +83,14 @@ class KwApiCon:
         ltoken_path = self._get_ltoken_path()
         with open(ltoken_path, 'r') as f:
             for r in f:
+                self.logger.debug('Checking in ltoken line "{0}"'.format(r.strip()))
                 rd = r.strip().split(';')
                 if rd[0] == self.host and rd[1] == self.port and rd[2] == self.user:
-                    return rd[2]
-                else:
-                    sys.exit(("Could not find matching ltoken record. Searching for"
-                        " host '{0}', port '{1}' and user '{2}' in file '{3}'").format(
-                            self.host, self.port, self.user, ltoken_path
-                        ))
+                    return rd[3]
+            sys.exit(("Could not find matching ltoken record. Searching for"
+                " host '{0}', port '{1}' and user '{2}' in file '{3}'").format(
+                    self.host, self.port, self.user, ltoken_path
+                ))
 
     # return ltoken file path or None, if not found
     def _get_ltoken_path(self):
