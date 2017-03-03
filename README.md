@@ -12,15 +12,21 @@ Example
 ```
 from kwplib import KwApiCon
 
-kwapiconf = KwApiCon()
-kwapiconf.set_url("http://localhost:8080")
-kwapiconf.set_user("emenda")
+t = KwApiCon()
+t.set_url("http://xubuntu:8080")
+t.set_user("emenda")
 
 vals = {"action" : "builds",
         "project" : "git" }
 
-# perform action "builds" on project git, on Klocwork server at localhost:8080
-kwapiconf.execute_query(vals)
+# perform action "builds" on project git, on Klocwork server at xubuntu:8080
+query_response = t.execute_query(vals)
+# if response is None, then there was an error
+if query_response.response == None:
+    print "Error: " + query_response.error_msg
+else:
+    for i in query_response.response:
+        print i
 ```
 
 ## Python version

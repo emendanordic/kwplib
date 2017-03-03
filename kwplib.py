@@ -29,8 +29,8 @@ if sys.version_info >= (3, 0):
 else:
     import httplib, urllib, urllib2
 
-RE_URL_PATTERN = "^(http[s]?):\/\/([\w.]+)*:([0-9]+)"
-RE_API_PATTERN = "^(http[s]?):\/\/([\w.]+)*:([0-9]+)\/review\/api$"
+RE_URL_PATTERN = "^(http[s]?):\/\/([\w.-]+)*:([0-9]+)"
+RE_API_PATTERN = "^(http[s]?):\/\/([\w.-]+)*:([0-9]+)\/review\/api$"
 
 class KwApiCon:
     def __init__(self, url=None, user=None, verbose=False):
