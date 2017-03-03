@@ -29,6 +29,8 @@ else:
         print i
 ```
 
+See example.py for more examples and perhaps something you can use as a template
+
 ## Python version
 
 Currently developed against python v2.7.x (same as comes packaged with klocwork - *kwpython*)
