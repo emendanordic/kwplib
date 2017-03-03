@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 
-import collections, logging, os, re, sys
+import collections, json, logging, os, re, sys
 import socket
 if sys.version_info >= (3, 0):
     import urllib.parse
@@ -132,3 +132,28 @@ class KwApiCon:
             return QueryResponse(None, 'Invalid URL Error: ' +  str(e))
         except:
             return QueryResponse(None, 'Error not caught... Something else went wrong.')
+
+
+    def get_project_list(self, project_regexp):
+        project_list = []
+        values = {
+            'action' : 'projects'
+        }
+        p_proj_match = re.compile(project_regexp)
+        query_response = self.execute_query(values)
+        if query_response.error_msg:
+            self.logger.error('Error retrieving project list: "{0}"'.format(query_response.error_msg))
+            return project_list
+        for project in query_response.response:
+            json_project = json.loads(project.strip())
+            if 'name' in  json_project:
+                p_name = json_project['name']
+                if p_proj_match.match(p_name):
+                    project_list.append(p_name)
+            else:
+                sys.exit('Something wrong with json record "{0}"'.format(project))
+
+        self.logger.debug('Matched projects from server: "{0}"'.format(
+            ', '.join(project_list)
+        ))
+        return project_list
